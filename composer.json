@@ -1,5 +1,6 @@
 {
     "name": "nullabe/students-grades-api",
+    "type": "project",
     "description": "A RESTFull API to manage students' grades. Written in PHP8, using Symfony5 framework.",
     "authors": [
         {
@@ -9,5 +10,20 @@
     ],
     "require": {
         "php": "^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpstan/phpstan": "^0.12.69",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "StudentsGradesApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StudentsGradesApi\\Tests\\": "tests/"
+        }
     }
 }

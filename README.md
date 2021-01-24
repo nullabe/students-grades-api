@@ -97,11 +97,11 @@ Implemented by using Hexagonal Architecture with CQRS and (some) DDD principles.
 
 ## Todo :
 
-[ ] composer.json bootstrap
+[x] composer.json bootstrap
 
-[ ] install quality&tests cs-fixer phpstan phpunit
+[x] install quality&tests cs-fixer phpstan phpunit
 
-[ ] makefile : quality/test/test-class/test-coverage
+[x] makefile : quality/test
 
 [ ] tdd domain & application
 
@@ -109,7 +109,7 @@ Implemented by using Hexagonal Architecture with CQRS and (some) DDD principles.
 
 [ ] docker configuration
 
-[ ] makefile : install/cc/exec
+[ ] makefile : install/cc/exec/test-coverage
 
 [ ] tdd infrastructure
 

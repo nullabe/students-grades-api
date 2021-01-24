@@ -1,0 +1,14 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->notPath('src/Symfony/Component/Translation/Tests/fixtures/resources.php')
+    ->in(__DIR__)
+;
+
+return (new PhpCsFixer\Config())
+    ->setRules([
+        '@PSR2' => true,
+        '@Symfony' => true,
+    ])
+    ->setFinder($finder)
+;
