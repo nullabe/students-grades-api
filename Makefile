@@ -11,4 +11,7 @@ phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon
 
 test:
-	vendor/bin/phpunit .
+	vendor/bin/phpunit --testsuite="students-grades-api"
+
+test-coverage:
+	vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
