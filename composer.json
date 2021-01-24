@@ -1,0 +1,13 @@
+{
+    "name": "nullabe/students-grades-api",
+    "description": "A RESTFull API to manage students' grades. Written in PHP8, using Symfony5 framework.",
+    "authors": [
+        {
+            "name": "Antoine B",
+            "email": "abelluard@outlook.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    }
+}
