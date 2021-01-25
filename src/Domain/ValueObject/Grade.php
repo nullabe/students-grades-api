@@ -8,7 +8,7 @@ class Grade
 {
     public function __construct(
         private string $subject,
-        private int $value
+        private float $value
     ) {
     }
 
@@ -17,7 +17,7 @@ class Grade
         return $this->subject;
     }
 
-    public function getValue(): int
+    public function getValue(): float
     {
         return $this->value;
     }

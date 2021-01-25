@@ -12,7 +12,7 @@ final class AddGradeToStudentCommand implements CommandInterface
     public function __construct(
         private UuidInterface $studentUuid,
         private string $studentGradeSubject,
-        private int $studentGradeValue
+        private float $studentGradeValue
     ) {
     }
 
@@ -26,7 +26,7 @@ final class AddGradeToStudentCommand implements CommandInterface
         return $this->studentGradeSubject;
     }
 
-    public function getStudentGradeValue(): int
+    public function getStudentGradeValue(): float
     {
         return $this->studentGradeValue;
     }

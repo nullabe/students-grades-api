@@ -76,4 +76,15 @@ final class Student
 
         return $this;
     }
+
+    public function getGradeAverage(): float
+    {
+        if (0 === count($this->getGrades())) {
+            return 0.0;
+        }
+
+        $grades = array_sum(array_map(fn (Grade $grade) => $grade->getValue(), $this->getGrades()));
+
+        return $grades / count($this->getGrades());
+    }
 }

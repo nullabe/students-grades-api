@@ -35,7 +35,7 @@ final class AddGradeToStudentTest extends TestCase
 
         $addGradeToStudentCommandHandler = new AddGradeToStudentCommandHandler($testStudentRepository);
 
-        $commandResponse = $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', 19));
+        $commandResponse = $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', 19.2));
 
         if (null === $commandResponseValue = $commandResponse->getValue()) {
             throw new \Exception('Response should be the updated student uuid');
@@ -54,7 +54,7 @@ final class AddGradeToStudentTest extends TestCase
         }
 
         $this->assertEquals('maths', $grade->getSubject());
-        $this->assertEquals(19, $grade->getValue());
+        $this->assertEquals(19.2, $grade->getValue());
     }
 
     public function test_add_invalid_grade_to_student(): void
