@@ -21,6 +21,10 @@ final class AddStudentCommandHandler implements CommandHandlerInterface
 
     public function handle(CommandInterface $command): CommandResponseInterface
     {
+        if (!$command instanceof AddStudentCommand) {
+            return new AddStudentCommandResponse();
+        }
+
         $student = new Student(
             Uuid::uuid4(),
             $command->getFirstName(),

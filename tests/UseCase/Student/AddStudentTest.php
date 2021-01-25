@@ -5,7 +5,7 @@ namespace StudentsGradesApi\Tests\UseCase\Student;
 use PHPUnit\Framework\TestCase;
 use StudentsGradesApi\Application\Command\AddStudent\AddStudentCommand;
 use StudentsGradesApi\Application\Command\AddStudent\AddStudentCommandHandler;
-use StudentsGradesApi\Tests\Utils\Persistence\Repository\TestStudentRepository;
+use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\TestStudentRepository;
 
 final class AddStudentTest extends TestCase
 {

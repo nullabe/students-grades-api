@@ -1,6 +1,6 @@
 <?php
 
-namespace StudentsGradesApi\Tests\Utils\Persistence\Repository;
+namespace StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository;
 
 use Ramsey\Uuid\UuidInterface;
 use StudentsGradesApi\Domain\Model\Student;
@@ -8,7 +8,7 @@ use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
 
 final class TestStudentRepository implements StudentRepositoryInterface
 {
-    /** @var array<int, Student> */
+    /** @var array<string, Student> */
     private array $students = [];
 
     public function get(UuidInterface $uuid): ?Student
@@ -24,7 +24,7 @@ final class TestStudentRepository implements StudentRepositoryInterface
 
     public function add(Student $student): void
     {
-        $this->students[] = $student;
+        $this->students[$student->getUuid()->toString()] = $student;
     }
 
     public function delete(Student $student): void
