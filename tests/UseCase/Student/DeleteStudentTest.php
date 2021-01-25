@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use StudentsGradesApi\Application\Command\DeleteStudent\DeleteStudentCommand;
 use StudentsGradesApi\Application\Command\DeleteStudent\DeleteStudentCommandHandler;
+use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\TestStudentRepository;
 
@@ -17,9 +18,9 @@ final class DeleteStudentTest extends TestCase
 
         $deleteStudentCommandHandler = new DeleteStudentCommandHandler($testStudentRepository);
 
-        $commandResponse = $deleteStudentCommandHandler->handle(new DeleteStudentCommand(Uuid::uuid4()));
+        $this->expectException(StudentNotFoundException::class);
 
-        $this->assertNull($commandResponse->getValue());
+        $deleteStudentCommandHandler->handle(new DeleteStudentCommand(Uuid::uuid4()));
     }
 
     public function test_delete_student(): void

@@ -5,7 +5,9 @@ namespace StudentsGradesApi\Application\Command\AddGradeToStudent;
 use StudentsGradesApi\Application\Command\CommandHandlerInterface;
 use StudentsGradesApi\Application\Command\CommandInterface;
 use StudentsGradesApi\Application\Command\CommandResponseInterface;
-use StudentsGradesApi\Application\Command\UpdateStudent\UpdateStudentCommandResponse;
+use StudentsGradesApi\Application\Exception\InvalidCommandException;
+use StudentsGradesApi\Application\Exception\InvalidGradeException;
+use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
 use StudentsGradesApi\Domain\ValueObject\Grade;
 
@@ -22,15 +24,15 @@ final class AddGradeToStudentCommandHandler implements CommandHandlerInterface
     public function handle(CommandInterface $command): CommandResponseInterface
     {
         if (!$command instanceof AddGradeToStudentCommand) {
-            return new UpdateStudentCommandResponse();
+            throw new InvalidCommandException();
         }
 
         if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
-            return new UpdateStudentCommandResponse();
+            throw new StudentNotFoundException();
         }
 
         if (!$this->isStudentGradeValueValid($command->getStudentGradeValue())) {
-            return new UpdateStudentCommandResponse();
+            throw new InvalidGradeException();
         }
 
         $student->addGrade(new Grade($command->getStudentGradeSubject(), $command->getStudentGradeValue()));

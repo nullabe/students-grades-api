@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use StudentsGradesApi\Application\Command\UpdateStudent\UpdateStudentCommand;
 use StudentsGradesApi\Application\Command\UpdateStudent\UpdateStudentCommandHandler;
+use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\TestStudentRepository;
 
@@ -17,9 +18,9 @@ final class UpdateStudentTest extends TestCase
 
         $updateStudentCommandHandler = new UpdateStudentCommandHandler($testStudentRepository);
 
-        $commandResponse = $updateStudentCommandHandler->handle(new UpdateStudentCommand(Uuid::uuid4()));
+        $this->expectException(StudentNotFoundException::class);
 
-        $this->assertNull($commandResponse->getValue());
+        $updateStudentCommandHandler->handle(new UpdateStudentCommand(Uuid::uuid4()));
     }
 
     public function test_update_student(): void

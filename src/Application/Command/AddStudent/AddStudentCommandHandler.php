@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use StudentsGradesApi\Application\Command\CommandHandlerInterface;
 use StudentsGradesApi\Application\Command\CommandInterface;
 use StudentsGradesApi\Application\Command\CommandResponseInterface;
+use StudentsGradesApi\Application\Exception\InvalidCommandException;
 use StudentsGradesApi\Domain\Model\Student;
 use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
 
@@ -22,7 +23,7 @@ final class AddStudentCommandHandler implements CommandHandlerInterface
     public function handle(CommandInterface $command): CommandResponseInterface
     {
         if (!$command instanceof AddStudentCommand) {
-            return new AddStudentCommandResponse();
+            throw new InvalidCommandException();
         }
 
         $student = new Student(

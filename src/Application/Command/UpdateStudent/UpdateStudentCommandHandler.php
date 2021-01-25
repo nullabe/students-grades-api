@@ -5,6 +5,8 @@ namespace StudentsGradesApi\Application\Command\UpdateStudent;
 use StudentsGradesApi\Application\Command\CommandHandlerInterface;
 use StudentsGradesApi\Application\Command\CommandInterface;
 use StudentsGradesApi\Application\Command\CommandResponseInterface;
+use StudentsGradesApi\Application\Exception\InvalidCommandException;
+use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
 
 /**
@@ -20,11 +22,11 @@ final class UpdateStudentCommandHandler implements CommandHandlerInterface
     public function handle(CommandInterface $command): CommandResponseInterface
     {
         if (!$command instanceof UpdateStudentCommand) {
-            return new UpdateStudentCommandResponse();
+            throw new InvalidCommandException();
         }
 
         if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
-            return new UpdateStudentCommandResponse();
+            throw new StudentNotFoundException();
         }
 
         if (null !== $firstName = $command->getStudentFirstName()) {

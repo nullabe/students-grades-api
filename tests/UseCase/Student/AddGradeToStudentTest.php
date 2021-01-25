@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use StudentsGradesApi\Application\Command\AddGradeToStudent\AddGradeToStudentCommand;
 use StudentsGradesApi\Application\Command\AddGradeToStudent\AddGradeToStudentCommandHandler;
+use StudentsGradesApi\Application\Exception\InvalidGradeException;
+use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\TestStudentRepository;
 
@@ -17,9 +19,9 @@ final class AddGradeToStudentTest extends TestCase
 
         $addGradeToStudentCommandHandler = new AddGradeToStudentCommandHandler($testStudentRepository);
 
-        $commandResponse = $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand(Uuid::uuid4(), 'maths', 19));
+        $this->expectException(StudentNotFoundException::class);
 
-        $this->assertNull($commandResponse->getValue());
+        $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand(Uuid::uuid4(), 'maths', 19));
     }
 
     public function test_add_grade_to_student(): void
@@ -62,12 +64,12 @@ final class AddGradeToStudentTest extends TestCase
 
         $addGradeToStudentCommandHandler = new AddGradeToStudentCommandHandler($testStudentRepository);
 
-        $commandResponse = $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', 21));
+        $this->expectException(InvalidGradeException::class);
 
-        $this->assertNull($commandResponse->getValue());
+        $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', 21));
 
-        $commandResponse = $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', -1));
+        $this->expectException(InvalidGradeException::class);
 
-        $this->assertNull($commandResponse->getValue());
+        $addGradeToStudentCommandHandler->handle(new AddGradeToStudentCommand($studentStub->getUuid(), 'maths', -1));
     }
 }
