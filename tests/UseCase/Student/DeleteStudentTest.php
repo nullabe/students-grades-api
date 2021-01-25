@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StudentsGradesApi\Tests\UseCase\Student;
 
 use PHPUnit\Framework\TestCase;

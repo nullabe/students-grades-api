@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StudentsGradesApi\Application\Command;
 
 use Ramsey\Uuid\UuidInterface;

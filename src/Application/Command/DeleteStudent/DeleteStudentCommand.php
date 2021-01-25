@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StudentsGradesApi\Application\Command\DeleteStudent;
 
 use Ramsey\Uuid\UuidInterface;

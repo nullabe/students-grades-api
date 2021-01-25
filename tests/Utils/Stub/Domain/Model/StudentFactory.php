@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StudentsGradesApi\Tests\Utils\Stub\Domain\Model;
 
 use Ramsey\Uuid\Uuid;
