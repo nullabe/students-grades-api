@@ -11,7 +11,7 @@ use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\Tes
 
 final class DeleteStudentTest extends TestCase
 {
-    public function testDeleteStudentWithUuidNotFound(): void
+    public function test_delete_student_with_uuid_not_found(): void
     {
         $testStudentRepository = new TestStudentRepository();
 
@@ -22,7 +22,7 @@ final class DeleteStudentTest extends TestCase
         $this->assertNull($commandResponse->getValue());
     }
 
-    public function testDeleteStudent(): void
+    public function test_delete_student(): void
     {
         $studentStub = StudentFactory::getStudent();
 

@@ -9,6 +9,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
         '@Symfony' => true,
+        'php_unit_method_casing' => ['case' => 'snake_case'],
     ])
     ->setFinder($finder)
 ;

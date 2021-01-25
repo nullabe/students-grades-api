@@ -23,7 +23,7 @@ final class DeleteStudentCommandHandler implements CommandHandlerInterface
             return new DeleteStudentCommandResponse();
         }
 
-        if (null === $student = $this->studentRepository->get($command->getUuid())) {
+        if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
             return new DeleteStudentCommandResponse();
         }
 

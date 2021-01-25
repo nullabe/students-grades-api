@@ -8,30 +8,30 @@ use StudentsGradesApi\Application\Command\CommandInterface;
 final class UpdateStudentCommand implements CommandInterface
 {
     public function __construct(
-        private UuidInterface $uuid,
-        private ?string $firstName = null,
-        private ?string $lastName = null,
-        private ?\DateTimeInterface $birthDate = null
+        private UuidInterface $studentUuid,
+        private ?string $studentFirstName = null,
+        private ?string $studentLastName = null,
+        private ?\DateTimeInterface $studentBirthDate = null
     ) {
     }
 
-    public function getUuid(): UuidInterface
+    public function getStudentUuid(): UuidInterface
     {
-        return $this->uuid;
+        return $this->studentUuid;
     }
 
-    public function getFirstName(): ?string
+    public function getStudentFirstName(): ?string
     {
-        return $this->firstName;
+        return $this->studentFirstName;
     }
 
-    public function getLastName(): ?string
+    public function getStudentLastName(): ?string
     {
-        return $this->lastName;
+        return $this->studentLastName;
     }
 
-    public function getBirthDate(): ?\DateTimeInterface
+    public function getStudentBirthDate(): ?\DateTimeInterface
     {
-        return $this->birthDate;
+        return $this->studentBirthDate;
     }
 }

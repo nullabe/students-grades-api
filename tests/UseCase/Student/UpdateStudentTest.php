@@ -11,7 +11,7 @@ use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\Tes
 
 final class UpdateStudentTest extends TestCase
 {
-    public function testUpdateStudentWithUuidNotFound(): void
+    public function test_update_student_with_uuid_not_found(): void
     {
         $testStudentRepository = new TestStudentRepository();
 
@@ -22,7 +22,7 @@ final class UpdateStudentTest extends TestCase
         $this->assertNull($commandResponse->getValue());
     }
 
-    public function testUpdateStudent(): void
+    public function test_update_student(): void
     {
         $studentStub = StudentFactory::getStudent();
 

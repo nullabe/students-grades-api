@@ -9,7 +9,7 @@ use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\Tes
 
 final class AddStudentTest extends TestCase
 {
-    public function testAddStudent(): void
+    public function test_add_student(): void
     {
         $testStudentRepository = new TestStudentRepository();
 

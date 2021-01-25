@@ -7,24 +7,24 @@ use StudentsGradesApi\Application\Command\CommandInterface;
 final class AddStudentCommand implements CommandInterface
 {
     public function __construct(
-        private string $firstName,
-        private string $lastName,
-        private \DateTimeInterface $birthDate
+        private string $studentFirstName,
+        private string $studentLastName,
+        private \DateTimeInterface $studentBirthDate
     ) {
     }
 
-    public function getFirstName(): string
+    public function getStudentFirstName(): string
     {
-        return $this->firstName;
+        return $this->studentFirstName;
     }
 
-    public function getLastName(): string
+    public function getStudentLastName(): string
     {
-        return $this->lastName;
+        return $this->studentLastName;
     }
 
-    public function getBirthDate(): \DateTimeInterface
+    public function getStudentBirthDate(): \DateTimeInterface
     {
-        return $this->birthDate;
+        return $this->studentBirthDate;
     }
 }

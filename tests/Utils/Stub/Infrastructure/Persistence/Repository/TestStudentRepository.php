@@ -8,31 +8,35 @@ use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
 
 final class TestStudentRepository implements StudentRepositoryInterface
 {
-    /** @var array<string, Student> */
+    /** @var array<string, string> */
     private array $students = [];
 
     public function get(UuidInterface $uuid): ?Student
     {
-        foreach ($this->students as $storedStudent) {
-            if ($uuid === $storedStudent->getUuid()) {
-                return $storedStudent;
-            }
+        if (!array_key_exists($uuid->toString(), $this->students)) {
+            return null;
         }
 
-        return null;
+        $student = unserialize($this->students[$uuid->toString()]);
+
+        if (!$student instanceof Student) {
+            return null;
+        }
+
+        return $student;
     }
 
     public function add(Student $student): void
     {
-        $this->students[$student->getUuid()->toString()] = $student;
+        $this->students[$student->getUuid()->toString()] = serialize($student);
     }
 
     public function delete(Student $student): void
     {
-        foreach ($this->students as $index => $storedStudent) {
-            if ($student === $storedStudent) {
-                unset($this->students[$index]);
-            }
+        if (!array_key_exists($student->getUuid()->toString(), $this->students)) {
+            return;
         }
+
+        unset($this->students[$student->getUuid()->toString()]);
     }
 }
