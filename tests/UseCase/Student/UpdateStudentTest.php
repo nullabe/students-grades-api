@@ -3,13 +3,25 @@
 namespace StudentsGradesApi\Tests\UseCase\Student;
 
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use StudentsGradesApi\Application\Command\UpdateStudent\UpdateStudentCommand;
 use StudentsGradesApi\Application\Command\UpdateStudent\UpdateStudentCommandHandler;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 use StudentsGradesApi\Tests\Utils\Stub\Infrastructure\Persistence\Repository\TestStudentRepository;
 
-class UpdateStudentTest extends TestCase
+final class UpdateStudentTest extends TestCase
 {
+    public function testUpdateStudentWithUuidNotFound(): void
+    {
+        $testStudentRepository = new TestStudentRepository();
+
+        $updateStudentCommandHandler = new UpdateStudentCommandHandler($testStudentRepository);
+
+        $commandResponse = $updateStudentCommandHandler->handle(new UpdateStudentCommand(Uuid::uuid4()));
+
+        $this->assertNull($commandResponse->getValue());
+    }
+
     public function testUpdateStudent(): void
     {
         $studentStub = StudentFactory::getStudent();
