@@ -18,20 +18,28 @@ cc:
 	${EXEC_PHP} ${CONSOLE} c:c -e dev
 
 db:
-	${EXEC_PHP} ${CONSOLE} doctrine:database:drop --force --if-exists
-	${EXEC_PHP} ${CONSOLE} doctrine:database:create
-	${EXEC_PHP} ${CONSOLE} doctrine:migration:migrate --no-interaction
+	${EXEC_PHP} ${CONSOLE} doctrine:database:drop --force --if-exists -e dev
+	${EXEC_PHP} ${CONSOLE} doctrine:database:drop --force --if-exists -e test --no-debug
+	${EXEC_PHP} ${CONSOLE} doctrine:database:create -e dev
+	${EXEC_PHP} ${CONSOLE} doctrine:database:create -e test --no-debug
+	${EXEC_PHP} ${CONSOLE} doctrine:migration:migrate --no-interaction -e dev
+	${EXEC_PHP} ${CONSOLE} doctrine:migration:migrate --no-interaction -e test --no-debug
+	${EXEC_PHP} ${CONSOLE} doctrine:fixtures:load --no-interaction -e dev
+	${EXEC_PHP} ${CONSOLE} doctrine:fixtures:load --no-interaction -e test --no-debug
 
 db-diff:
 	${EXEC_PHP} ${CONSOLE} doctrine:migration:diff
 
 test:
+	rm -rf ./var/cache/test/*
 	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api"
 
 test-class:
+	rm -rf ./var/cache/test/*
 	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --filter=$(class)
 
 test-coverage:
+	rm -rf ./var/cache/test/*
 	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
 
 build:

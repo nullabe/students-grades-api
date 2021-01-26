@@ -31,7 +31,9 @@
         "friendsofphp/php-cs-fixer": "^2.18",
         "phpstan/phpstan": "^0.12.69",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "*"
+        "symfony/browser-kit": "*",
+        "dama/doctrine-test-bundle": "^6.5",
+        "doctrine/doctrine-fixtures-bundle": "^3.4"
     },
     "autoload": {
         "psr-4": {

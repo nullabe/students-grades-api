@@ -8,15 +8,22 @@
       <file>./src/Infrastructure/HttpApi/Symfony/Kernel.php</file>
     </exclude>
   </coverage>
+
   <testsuites>
     <testsuite name="students-grades-api">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>
+
+  <extensions>
+    <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+  </extensions>
+
   <php>
     <env name="KERNEL_CLASS" value="StudentsGradesApi\Infrastructure\HttpApi\Symfony\Kernel" />
-    <env name="DATABASE_URL" value="mysql://students_grades_api_user:students_grades_api_password@database:3306/students_grades_api?serverVersion=5.7" /> <!-- todo: change this to a separate test database -->
+    <env name="DATABASE_URL" value="mysql://students_grades_api_user:students_grades_api_password@database_test:3306/students_grades_api?serverVersion=5.7" />
     <env name="APP_ENV" value="test" />
     <env name="APP_DEBUG" value="0" />
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
   </php>
 </phpunit>
