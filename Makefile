@@ -1,3 +1,6 @@
+DOCKER_COMPOSE?=docker-compose --file deploy/docker/dev/docker-compose.yml
+EXEC_PHP?=$(DOCKER_COMPOSE) exec php-fpm
+
 quality:
 	make cs-fix-dryrun phpstan
 
@@ -11,16 +14,16 @@ phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon
 
 test:
-	vendor/bin/phpunit --testsuite="students-grades-api"
+	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api"
 
 test-coverage:
-	vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
+	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
 
 build:
-	docker-compose --file deploy/docker/dev/docker-compose.yml build --force-rm
+	${DOCKER_COMPOSE} build --force-rm
 
 start:
-	docker-compose --file deploy/docker/dev/docker-compose.yml up -d --remove-orphan
+	${DOCKER_COMPOSE} up -d --remove-orphan
 
 stop:
-	docker-compose --file deploy/docker/dev/docker-compose.yml down
+	${DOCKER_COMPOSE} down

@@ -12,6 +12,6 @@ services:
             - '../src/Domain/ValueObject'
             - '../src/Infrastructure/HttpApi/Symfony/Kernel.php'
 
-    StudentsGradesApi\Controller\:
+    StudentsGradesApi\Infrastructure\HttpApi\Symfony\Controller\:
         resource: '../src/Infrastructure/HttpApi/Symfony/Controller/'
         tags: ['controller.service_arguments']

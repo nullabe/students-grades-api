@@ -75,6 +75,9 @@
     "psr/cache": {
         "version": "1.0.1"
     },
+    "symfony/browser-kit": {
+        "version": "v5.2.1"
+    },
     "symfony/cache": {
         "version": "v5.2.1"
     },
@@ -88,6 +91,9 @@
         "version": "v5.2.1"
     },
     "symfony/doctrine-bridge": {
+        "version": "v5.2.1"
+    },
+    "symfony/dom-crawler": {
         "version": "v5.2.1"
     },
     "symfony/dotenv": {

@@ -4,10 +4,19 @@
     <include>
       <directory>./src</directory>
     </include>
+    <exclude>
+      <file>./src/Infrastructure/HttpApi/Symfony/Kernel.php</file>
+    </exclude>
   </coverage>
   <testsuites>
     <testsuite name="students-grades-api">
       <directory>./tests</directory>
     </testsuite>
   </testsuites>
+  <php>
+    <env name="KERNEL_CLASS" value="StudentsGradesApi\Infrastructure\HttpApi\Symfony\Kernel" />
+    <env name="DATABASE_URL" value="mysql://students_grade_api_user:students_grade_api_password@127.0.0.1:3306/students_grade_api?serverVersion=5.7" /> <!-- todo: change this to a separate test database -->
+    <env name="APP_ENV" value="test" />
+    <env name="APP_DEBUG" value="0" />
+  </php>
 </phpunit>
