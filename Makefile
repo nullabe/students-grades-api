@@ -1,5 +1,6 @@
 DOCKER_COMPOSE?=docker-compose --file deploy/docker/dev/docker-compose.yml
 EXEC_PHP?=$(DOCKER_COMPOSE) exec php-fpm
+CONSOLE?=bin/console
 
 quality:
 	make cs-fix-dryrun phpstan
@@ -13,8 +14,22 @@ cs-fix-dryrun:
 phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon
 
+cc:
+	${EXEC_PHP} ${CONSOLE} c:c -e dev
+
+db:
+	${EXEC_PHP} ${CONSOLE} doctrine:database:drop --force --if-exists
+	${EXEC_PHP} ${CONSOLE} doctrine:database:create
+	${EXEC_PHP} ${CONSOLE} doctrine:migration:migrate --no-interaction
+
+db-diff:
+	${EXEC_PHP} ${CONSOLE} doctrine:migration:diff
+
 test:
 	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api"
+
+test-class:
+	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --filter=$(class)
 
 test-coverage:
 	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
@@ -27,3 +42,6 @@ start:
 
 stop:
 	${DOCKER_COMPOSE} down
+
+exec:
+	docker exec -it php-fpm /bin/sh

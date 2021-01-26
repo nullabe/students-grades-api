@@ -1,3 +1,4 @@
 index:
     path: /
     controller: StudentsGradesApi\Infrastructure\HttpApi\Symfony\Controller\IndexController::index
+

@@ -1,0 +1,3 @@
+controllers:
+  resource: ../../src/Infrastructure/HttpApi/Symfony/Controller/*/*
+  type: annotation
