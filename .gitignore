@@ -1,5 +1,7 @@
 .idea
 
+/deploy/docker/dev/database
+/var/
 /vendor/
 
 .php_cs.cache

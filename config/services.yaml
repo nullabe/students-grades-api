@@ -1,0 +1,17 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    StudentsGradesApi\:
+        resource: '../src/'
+        exclude:
+            - '../src/Domain/Model'
+            - '../src/Domain/ValueObject'
+            - '../src/Infrastructure/HttpApi/Symfony/Kernel.php'
+
+    StudentsGradesApi\Controller\:
+        resource: '../src/Infrastructure/HttpApi/Symfony/Controller/'
+        tags: ['controller.service_arguments']

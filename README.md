@@ -103,11 +103,11 @@ Implemented by using Hexagonal Architecture with CQRS and (some) DDD principles.
 
 [x] makefile : quality/test
 
-[ ] tdd domain & application
+[x] tdd domain & application
 
-[ ] install symfony 5 & doctrine
+[x] install symfony 5 & doctrine
 
-[ ] docker configuration
+[x] docker configuration
 
 [ ] makefile : install/cc/exec/test-coverage
 

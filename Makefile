@@ -15,3 +15,12 @@ test:
 
 test-coverage:
 	vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
+
+build:
+	docker-compose --file deploy/docker/dev/docker-compose.yml build --force-rm
+
+start:
+	docker-compose --file deploy/docker/dev/docker-compose.yml up -d --remove-orphan
+
+stop:
+	docker-compose --file deploy/docker/dev/docker-compose.yml down
