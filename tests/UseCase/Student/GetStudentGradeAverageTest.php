@@ -18,7 +18,7 @@ final class GetStudentGradeAverageTest extends TestCase
 
         $getStudentGradeAverageQuery = new GetStudentGradeAverageQuery($studentStub->getUuid());
 
-        $this->assertEquals($studentStub->getUuid(), $getStudentGradeAverageQuery->getStudentUuid());
+        $this->assertEquals($studentStub->getUuid(), $getStudentGradeAverageQuery->getUuid());
     }
 
     public function test_student_grade_average_view_model_from_student(): void
@@ -34,14 +34,14 @@ final class GetStudentGradeAverageTest extends TestCase
 
         $getStudentGradeAverageViewModel = new StudentGradeAverageViewModel($studentStub);
 
-        $this->assertEquals($studentStub->getUuid(), $getStudentGradeAverageViewModel->getStudentUuid());
-        $this->assertEquals(12.0, $getStudentGradeAverageViewModel->getStudentGradeAverage());
+        $this->assertEquals($studentStub->getUuid(), $getStudentGradeAverageViewModel->getUuid());
+        $this->assertEquals(12.0, $getStudentGradeAverageViewModel->getGradeAverage());
     }
 
     public function test_student_grade_average_view_model_from_student_with_no_grades(): void
     {
         $getStudentGradeAverageViewModel = new StudentGradeAverageViewModel(StudentFactory::getStudent());
 
-        $this->assertEquals(0.0, $getStudentGradeAverageViewModel->getStudentGradeAverage());
+        $this->assertEquals(0.0, $getStudentGradeAverageViewModel->getGradeAverage());
     }
 }

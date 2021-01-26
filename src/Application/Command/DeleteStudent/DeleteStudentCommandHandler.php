@@ -27,7 +27,7 @@ final class DeleteStudentCommandHandler implements CommandHandlerInterface
             throw new InvalidCommandException();
         }
 
-        if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
+        if (null === $student = $this->studentRepository->get($command->getUuid())) {
             throw new StudentNotFoundException();
         }
 

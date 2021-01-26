@@ -30,9 +30,9 @@ final class AddStudentCommandHandler implements CommandHandlerInterface
 
         $student = new Student(
             Uuid::uuid4(),
-            $command->getStudentFirstName(),
-            $command->getStudentLastName(),
-            $command->getStudentBirthDate()
+            $command->getFirstName(),
+            $command->getLastName(),
+            $command->getBirthDate()
         );
 
         $this->studentRepository->add($student);

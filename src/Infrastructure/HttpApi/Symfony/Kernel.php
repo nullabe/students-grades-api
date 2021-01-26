@@ -17,16 +17,16 @@ final class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->import(self::CONFIG_BASE_PATH .'/{packages}/*.yaml');
-        $container->import(self::CONFIG_BASE_PATH .'/{packages}/'.$this->environment.'/*.yaml');
-        $container->import(self::CONFIG_BASE_PATH .'/services.yaml');
-        $container->import(self::CONFIG_BASE_PATH .'/{services}_'.$this->environment.'.yaml');
+        $container->import(self::CONFIG_BASE_PATH.'/{packages}/*.yaml');
+        $container->import(self::CONFIG_BASE_PATH.'/{packages}/'.$this->environment.'/*.yaml');
+        $container->import(self::CONFIG_BASE_PATH.'/services.yaml');
+        $container->import(self::CONFIG_BASE_PATH.'/{services}_'.$this->environment.'.yaml');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import(self::CONFIG_BASE_PATH .'/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import(self::CONFIG_BASE_PATH .'/{routes}/*.yaml');
-        $routes->import(self::CONFIG_BASE_PATH .'/routes.yaml');
+        $routes->import(self::CONFIG_BASE_PATH.'/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import(self::CONFIG_BASE_PATH.'/{routes}/*.yaml');
+        $routes->import(self::CONFIG_BASE_PATH.'/routes.yaml');
     }
 }

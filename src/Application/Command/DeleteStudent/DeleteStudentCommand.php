@@ -10,12 +10,12 @@ use StudentsGradesApi\Application\Command\CommandInterface;
 final class DeleteStudentCommand implements CommandInterface
 {
     public function __construct(
-        private UuidInterface $studentUuid
+        private UuidInterface $uuid
     ) {
     }
 
-    public function getStudentUuid(): UuidInterface
+    public function getUuid(): UuidInterface
     {
-        return $this->studentUuid;
+        return $this->uuid;
     }
 }

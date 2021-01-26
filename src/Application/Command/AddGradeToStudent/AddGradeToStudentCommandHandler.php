@@ -29,15 +29,15 @@ final class AddGradeToStudentCommandHandler implements CommandHandlerInterface
             throw new InvalidCommandException();
         }
 
-        if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
+        if (null === $student = $this->studentRepository->get($command->getUuid())) {
             throw new StudentNotFoundException();
         }
 
-        if (!$this->isStudentGradeValueValid($command->getStudentGradeValue())) {
+        if (!$this->isStudentGradeValueValid($command->getGradeValue())) {
             throw new InvalidGradeException();
         }
 
-        $student->addGrade(new Grade($command->getStudentGradeSubject(), $command->getStudentGradeValue()));
+        $student->addGrade(new Grade($command->getGradeSubject(), $command->getGradeValue()));
 
         $this->studentRepository->add($student);
 

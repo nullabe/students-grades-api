@@ -9,23 +9,23 @@ use StudentsGradesApi\Domain\Model\Student;
 
 final class StudentGradeAverageViewModel implements ViewModelInterface
 {
-    private UuidInterface $studentUuid;
+    private UuidInterface $uuid;
 
-    private float $studentGradeAverage;
+    private float $gradeAverage;
 
     public function __construct(Student $student)
     {
-        $this->studentUuid = $student->getUuid();
-        $this->studentGradeAverage = $student->getGradeAverage();
+        $this->uuid = $student->getUuid();
+        $this->gradeAverage = $student->getGradeAverage();
     }
 
-    public function getStudentUuid(): UuidInterface
+    public function getUuid(): UuidInterface
     {
-        return $this->studentUuid;
+        return $this->uuid;
     }
 
-    public function getStudentGradeAverage(): float
+    public function getGradeAverage(): float
     {
-        return $this->studentGradeAverage;
+        return $this->gradeAverage;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StudentsGradesApi\Infrastructure\HttpApi\Symfony\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

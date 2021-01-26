@@ -27,19 +27,19 @@ final class UpdateStudentCommandHandler implements CommandHandlerInterface
             throw new InvalidCommandException();
         }
 
-        if (null === $student = $this->studentRepository->get($command->getStudentUuid())) {
+        if (null === $student = $this->studentRepository->get($command->getUuid())) {
             throw new StudentNotFoundException();
         }
 
-        if (null !== $firstName = $command->getStudentFirstName()) {
+        if (null !== $firstName = $command->getFirstName()) {
             $student->setFirstName($firstName);
         }
 
-        if (null !== $lastName = $command->getStudentLastName()) {
+        if (null !== $lastName = $command->getLastName()) {
             $student->setLastName($lastName);
         }
 
-        if (null !== $birthDate = $command->getStudentBirthDate()) {
+        if (null !== $birthDate = $command->getBirthDate()) {
             $student->setBirthDate($birthDate);
         }
 

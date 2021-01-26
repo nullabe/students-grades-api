@@ -10,24 +10,24 @@ use StudentsGradesApi\Application\Command\CommandInterface;
 final class AddGradeToStudentCommand implements CommandInterface
 {
     public function __construct(
-        private UuidInterface $studentUuid,
-        private string $studentGradeSubject,
-        private float $studentGradeValue
+        private UuidInterface $uuid,
+        private string $gradeSubject,
+        private float $gradeValue
     ) {
     }
 
-    public function getStudentUuid(): UuidInterface
+    public function getUuid(): UuidInterface
     {
-        return $this->studentUuid;
+        return $this->uuid;
     }
 
-    public function getStudentGradeSubject(): string
+    public function getGradeSubject(): string
     {
-        return $this->studentGradeSubject;
+        return $this->gradeSubject;
     }
 
-    public function getStudentGradeValue(): float
+    public function getGradeValue(): float
     {
-        return $this->studentGradeValue;
+        return $this->gradeValue;
     }
 }

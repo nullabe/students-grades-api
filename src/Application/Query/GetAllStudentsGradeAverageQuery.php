@@ -9,18 +9,18 @@ use Ramsey\Uuid\UuidInterface;
 final class GetAllStudentsGradeAverageQuery implements QueryInterface
 {
     /**
-     * @param array<int, UuidInterface> $studentsUuid
+     * @param array<int, UuidInterface> $uuid
      */
     public function __construct(
-        private array $studentsUuid
+        private array $uuid
     ) {
     }
 
     /**
      * @return array<int, UuidInterface>
      */
-    public function getStudentsUuid(): array
+    public function getUuid(): array
     {
-        return $this->studentsUuid;
+        return $this->uuid;
     }
 }

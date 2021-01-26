@@ -9,12 +9,12 @@ use Ramsey\Uuid\UuidInterface;
 final class GetStudentGradeAverageQuery implements QueryInterface
 {
     public function __construct(
-        private UuidInterface $studentUuid
+        private UuidInterface $uuid
     ) {
     }
 
-    public function getStudentUuid(): UuidInterface
+    public function getUuid(): UuidInterface
     {
-        return $this->studentUuid;
+        return $this->uuid;
     }
 }

@@ -20,6 +20,6 @@ final class GetAllStudentsGradeAverageTest extends TestCase
             $studentStub2->getUuid(),
         ]);
 
-        $this->assertCount(2, $getAllStudentsGradeAverageQuery->getStudentsUuid());
+        $this->assertCount(2, $getAllStudentsGradeAverageQuery->getUuid());
     }
 }
