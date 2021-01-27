@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,16 +33,20 @@ class StudentDoctrineEntity
     /** @ORM\Column(type="datetime", nullable=false) */
     private ?\DateTimeInterface $birthDate = null;
 
+    /**
+     * @var Collection<int, GradeDoctrineEntity>
+     * @ORM\OneToMany(targetEntity="StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\GradeDoctrineEntity", mappedBy="student", cascade={"persist", "remove"})
+     */
+    private Collection $grades;
+
+    public function __construct()
+    {
+        $this->grades = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(?int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getUuid(): ?string
@@ -87,6 +93,31 @@ class StudentDoctrineEntity
     public function setBirthDate(?\DateTimeInterface $birthDate): self
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GradeDoctrineEntity>
+     */
+    public function getGrades(): Collection
+    {
+        return $this->grades;
+    }
+
+    /**
+     * @param Collection<int, GradeDoctrineEntity> $grades
+     */
+    public function setGrades(Collection $grades): self
+    {
+        $this->grades = $grades;
+
+        return $this;
+    }
+
+    public function addGrade(GradeDoctrineEntity $grade): self
+    {
+        $this->grades->add($grade);
 
         return $this;
     }

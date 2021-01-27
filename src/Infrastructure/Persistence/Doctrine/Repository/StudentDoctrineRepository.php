@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 use StudentsGradesApi\Domain\Model\Student;
 use StudentsGradesApi\Domain\Repository\StudentRepositoryInterface;
+use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\GradeDoctrineEntity;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\StudentDoctrineEntity;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\ModelTransformer\StudentModelTransformer;
 
@@ -29,10 +30,12 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
 
     public function add(Student $student): void
     {
-        $this->entityManager->persist(
-            StudentModelTransformer::toDoctrineEntity($student, $this->getStudentByUuid($student->getUuid()))
-        );
+        $studentDoctrineEntity = StudentModelTransformer::toDoctrineEntity($student, $this->getStudentByUuid($student->getUuid()));
 
+        // Usefull for updating grades, we don't know here which are new ones, so we remove them all.
+        $this->removeStudentGrades($studentDoctrineEntity);
+
+        $this->entityManager->persist($studentDoctrineEntity);
         $this->entityManager->flush();
     }
 
@@ -49,5 +52,16 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
     private function getStudentByUuid(UuidInterface $uuid): ?StudentDoctrineEntity
     {
         return $this->entityManager->getRepository(StudentDoctrineEntity::class)->findOneBy(['uuid' => $uuid->toString()]);
+    }
+
+    private function removeStudentGrades(StudentDoctrineEntity $studentDoctrineEntity): void
+    {
+        $grades = $this->entityManager->getRepository(GradeDoctrineEntity::class)->findBy(['student' => $studentDoctrineEntity]);
+
+        foreach ($grades as $grade) {
+            $this->entityManager->remove($grade);
+        }
+
+        $this->entityManager->flush();
     }
 }

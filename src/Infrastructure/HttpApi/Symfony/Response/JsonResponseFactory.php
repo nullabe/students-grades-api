@@ -6,12 +6,14 @@ namespace StudentsGradesApi\Infrastructure\HttpApi\Symfony\Response;
 
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use StudentsGradesApi\Application\Command\CommandResponseInterface;
+use StudentsGradesApi\Application\Exception\InvalidGradeException;
 use StudentsGradesApi\Application\Exception\StudentNotFoundException;
 use StudentsGradesApi\Infrastructure\HttpApi\Symfony\Exception\UnmanagedHttpApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 
 final class JsonResponseFactory
 {
@@ -23,10 +25,12 @@ final class JsonResponseFactory
     public static function fromException(\Exception $e): JsonResponse
     {
         return match ($exceptionClass = get_class($e)) {
+            InvalidGradeException::class,
+            InvalidUuidStringException::class,
+            \JsonException::class,
             MissingConstructorArgumentsException::class,
             NotEncodableValueException::class,
-            \JsonException::class,
-            InvalidUuidStringException::class => self::buildBadRequestJsonResponse($e->getMessage()),
+            NotNormalizableValueException::class => self::buildBadRequestJsonResponse($e->getMessage()),
 
             StudentNotFoundException::class => self::buildNotFoundJsonResponse(),
             default => throw new UnmanagedHttpApiException(sprintf('%s exception class in not managed', $exceptionClass)) };
