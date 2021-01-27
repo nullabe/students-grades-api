@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace StudentsGradesApi\Tests\Integration\HttpApi\Controller\Post;
 
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\StudentDoctrineEntity;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use StudentsGradesApi\Tests\Utils\TestCase\HttpApiTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class AddStudentControllerTest extends WebTestCase
+final class AddStudentControllerTest extends HttpApiTestCase
 {
     public function test_post_student_with_missing_values_in_request(): void
     {
@@ -56,22 +55,8 @@ final class AddStudentControllerTest extends WebTestCase
 
     private function assertStudentDoctrineEntity(KernelBrowser $client, string $studentUuid): void
     {
-        /** @var ManagerRegistry|null $doctrineObjectManagerRegistry */
-        $doctrineObjectManagerRegistry = $client
-            ->getContainer()
-            ->get('doctrine')
-        ;
-
-        if (null === $doctrineObjectManagerRegistry) {
-            throw new \Exception('Doctrine manager registry should not be null');
-        }
-
-        $studentDoctrineEntityRepository = $doctrineObjectManagerRegistry
-            ->getRepository(StudentDoctrineEntity::class)
-        ;
-
         /** @var StudentDoctrineEntity|null $studentDoctrineEntity */
-        $studentDoctrineEntity = $studentDoctrineEntityRepository->findOneBy(['uuid' => $studentUuid]);
+        $studentDoctrineEntity = $this->getStudentDoctrineObjectRepository($client)->findOneBy(['uuid' => $studentUuid]);
 
         if (null === $studentDoctrineEntity) {
             throw new \Exception('Student stored in database should not be null');

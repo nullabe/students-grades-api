@@ -2,7 +2,8 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->notPath('src/Symfony/Component/Translation/Tests/fixtures/resources.php')
-    ->in('./src', './tests')
+    ->in('./src')
+    ->in('./tests')
 ;
 
 return (new PhpCsFixer\Config())

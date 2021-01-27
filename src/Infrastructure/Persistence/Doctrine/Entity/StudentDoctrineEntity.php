@@ -36,6 +36,13 @@ class StudentDoctrineEntity
         return $this->id;
     }
 
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getUuid(): ?string
     {
         return $this->uuid;

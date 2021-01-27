@@ -20,9 +20,7 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
 
     public function get(UuidInterface $uuid): ?Student
     {
-        $student = $this->entityManager->getRepository(StudentDoctrineEntity::class)->findOneBy(['uuid' => $uuid]);
-
-        if (null !== $student) {
+        if (null !== $student = $this->getStudentByUuid($uuid)) {
             return StudentModelTransformer::toDomainModel($student);
         }
 
@@ -31,7 +29,10 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
 
     public function add(Student $student): void
     {
-        $this->entityManager->persist(StudentModelTransformer::toDoctrineEntity($student));
+        $this->entityManager->persist(
+            StudentModelTransformer::toDoctrineEntity($student, $this->getStudentByUuid($student->getUuid()))
+        );
+
         $this->entityManager->flush();
     }
 
@@ -43,5 +44,10 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
 
         $this->entityManager->remove($studentDoctrineEntity);
         $this->entityManager->flush();
+    }
+
+    private function getStudentByUuid(UuidInterface $uuid): ?StudentDoctrineEntity
+    {
+        return $this->entityManager->getRepository(StudentDoctrineEntity::class)->findOneBy(['uuid' => $uuid->toString()]);
     }
 }

@@ -1,18 +1,9 @@
 .idea
 
 /deploy/docker/dev/database
+/deploy/docker/dev/database_test
 /var/
 /vendor/
 
 .php_cs.cache
 .phpunit.result.cache
-
-###> friendsofphp/php-cs-fixer ###
-/.php_cs
-/.php_cs.cache
-###< friendsofphp/php-cs-fixer ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###

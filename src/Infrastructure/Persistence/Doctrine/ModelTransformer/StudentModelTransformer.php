@@ -32,10 +32,13 @@ final class StudentModelTransformer
         return new Student(Uuid::fromString($uuid), $firstName, $lastName, $birthDate);
     }
 
-    public static function toDoctrineEntity(Student $student): StudentDoctrineEntity
+    public static function toDoctrineEntity(Student $student, ?StudentDoctrineEntity $studentDoctrineEntity = null): StudentDoctrineEntity
     {
-        return (new StudentDoctrineEntity())
-            ->setUuid($student->getUuid()->toString())
+        if (null === $studentDoctrineEntity) {
+            $studentDoctrineEntity = (new StudentDoctrineEntity())->setUuid($student->getUuid()->toString());
+        }
+
+        return $studentDoctrineEntity
             ->setFirstName($student->getFirstName())
             ->setLastName($student->getLastName())
             ->setBirthDate($student->getBirthDate())
