@@ -25,7 +25,7 @@ final class GetStudentGradeAverageController extends AbstractController
     }
 
     #[Route(['path' => '/students/{uuid}/grades/average', 'methods' => ['GET']])]
-    public function addGradeToStudent(string $uuid): JsonResponse
+    public function getStudentGradeAverage(string $uuid): JsonResponse
     {
         try {
             $getStudentGradeAverageQuery = $this->denormalizer->denormalize(['uuid' => Uuid::fromString($uuid)], GetStudentGradeAverageQuery::class);

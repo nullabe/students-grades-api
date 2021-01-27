@@ -51,6 +51,6 @@ final class AddGradeToStudentCommandHandler implements CommandHandlerInterface
 
     private function isStudentGradeValueValid(float $studentGradeValue): bool
     {
-        return $studentGradeValue >= 0 && $studentGradeValue < 21;
+        return $studentGradeValue >= 0 && $studentGradeValue <= 20;
     }
 }

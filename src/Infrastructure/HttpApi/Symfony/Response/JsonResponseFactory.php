@@ -41,7 +41,7 @@ final class JsonResponseFactory
             NotNormalizableValueException::class => self::buildBadRequestJsonResponse($e->getMessage()),
 
             StudentNotFoundException::class => self::buildNotFoundJsonResponse(),
-            default => throw new UnmanagedHttpApiException(sprintf('%s exception class in not managed', $exceptionClass)) };
+            default => throw new UnmanagedHttpApiException(sprintf('%s exception is not managed', $exceptionClass)) };
     }
 
     private static function buildBadRequestJsonResponse(string $exceptionMessage): JsonResponse
