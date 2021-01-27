@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class UpdateStudentController extends AbstractController
+final class UpdateStudentController extends AbstractController
 {
     public function __construct(
         private DenormalizerInterface $denormalizer,
@@ -23,8 +23,8 @@ class UpdateStudentController extends AbstractController
     ) {
     }
 
-    #[Route('/students/{uuid}', 'PUT')]
-    public function addStudent(Request $request, string $uuid): JsonResponse
+    #[Route(['path' => '/students/{uuid}', 'methods' => ['PUT']])]
+    public function updateStudent(Request $request, string $uuid): JsonResponse
     {
         try {
             $requestContent = json_decode((string) $request->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -39,6 +39,4 @@ class UpdateStudentController extends AbstractController
 
         return JsonResponseFactory::fromCommandReponse($commandResponse, Response::HTTP_OK);
     }
-
-    //StudentNotFoundException
 }

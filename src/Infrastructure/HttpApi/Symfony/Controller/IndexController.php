@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class IndexController extends AbstractController
 {
-    #[Route('/', 'GET')]
+    #[Route(['path' => '/', 'methods' => ['GET']])]
     public function index(): JsonResponse
     {
         return new JsonResponse();

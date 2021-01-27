@@ -22,7 +22,7 @@ final class AddStudentController extends AbstractController
     ) {
     }
 
-    #[Route('/students', 'POST')]
+    #[Route(['path' => '/students', 'methods' => ['POST']])]
     public function addStudent(Request $request): JsonResponse
     {
         try {
