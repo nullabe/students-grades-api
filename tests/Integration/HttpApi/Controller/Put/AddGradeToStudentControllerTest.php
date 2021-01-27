@@ -85,10 +85,10 @@ final class AddGradeToStudentControllerTest extends HttpApiTestCase
             throw new \Exception('Student stored in database should not be null');
         }
 
-        $this->assertCount(1, $studentDoctrineEntity->getGrades());
+        $this->assertCount(4, $studentDoctrineEntity->getGrades());
 
         /** @var GradeDoctrineEntity|null $grade */
-        $grade = $studentDoctrineEntity->getGrades()->first();
+        $grade = $studentDoctrineEntity->getGrades()->last();
 
         if (null === $grade) {
             throw new \Exception('Grade stored in database should not be null');

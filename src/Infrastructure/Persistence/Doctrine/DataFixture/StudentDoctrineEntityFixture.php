@@ -6,6 +6,7 @@ namespace StudentsGradesApi\Infrastructure\Persistence\Doctrine\DataFixture;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\GradeDoctrineEntity;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\StudentDoctrineEntity;
 
 final class StudentDoctrineEntityFixture extends Fixture
@@ -24,6 +25,30 @@ final class StudentDoctrineEntityFixture extends Fixture
             ->setFirstName('Antoine')
             ->setLastName('Daniel')
             ->setBirthDate(new \DateTime('01-01-1991'))
+        ;
+
+        $studentXavierDang
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Histoire')->setValue(13)->setStudent($studentXavierDang)
+            )
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Physique')->setValue(18)->setStudent($studentXavierDang)
+            )
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Maths')->setValue(20)->setStudent($studentXavierDang)
+            )
+        ;
+
+        $studentAntoineDaniel
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Histoire')->setValue(12)->setStudent($studentAntoineDaniel)
+            )
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Physique')->setValue(17)->setStudent($studentAntoineDaniel)
+            )
+            ->addGrade(
+                (new GradeDoctrineEntity())->setSubject('Maths')->setValue(19)->setStudent($studentAntoineDaniel)
+            )
         ;
 
         $manager->persist($studentXavierDang);

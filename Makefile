@@ -32,7 +32,7 @@ db-diff:
 
 test:
 	rm -rf ./var/cache/test/*
-	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api"
+	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --stop-on-failure
 
 test-class:
 	rm -rf ./var/cache/test/*
@@ -40,7 +40,7 @@ test-class:
 
 test-coverage:
 	rm -rf ./var/cache/test/*
-	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --coverage-text
+	${EXEC_PHP} vendor/bin/phpunit --testsuite="students-grades-api" --stop-on-failure --coverage-text
 
 build:
 	${DOCKER_COMPOSE} build --force-rm

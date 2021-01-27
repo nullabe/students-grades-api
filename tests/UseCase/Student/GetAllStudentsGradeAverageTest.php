@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StudentsGradesApi\Tests\UseCase\Student;
 
 use PHPUnit\Framework\TestCase;
-use StudentsGradesApi\Application\Query\GetAllStudentsGradeAverageQuery;
+use StudentsGradesApi\Application\Query\GetAllStudentsGradeAverage\GetAllStudentsGradeAverageQuery;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 
 final class GetAllStudentsGradeAverageTest extends TestCase

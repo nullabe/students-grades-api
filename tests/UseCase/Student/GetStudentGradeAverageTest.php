@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StudentsGradesApi\Tests\UseCase\Student;
 
 use PHPUnit\Framework\TestCase;
-use StudentsGradesApi\Application\Query\GetStudentGradeAverageQuery;
+use StudentsGradesApi\Application\Query\GetStudentGradeAverage\GetStudentGradeAverageQuery;
 use StudentsGradesApi\Application\Query\StudentGradeAverageViewModel;
 use StudentsGradesApi\Domain\ValueObject\Grade;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
@@ -34,7 +34,7 @@ final class GetStudentGradeAverageTest extends TestCase
 
         $getStudentGradeAverageViewModel = new StudentGradeAverageViewModel($studentStub);
 
-        $this->assertEquals($studentStub->getUuid(), $getStudentGradeAverageViewModel->getUuid());
+        $this->assertEquals($studentStub->getUuid()->toString(), $getStudentGradeAverageViewModel->getUuid());
         $this->assertEquals(12.0, $getStudentGradeAverageViewModel->getGradeAverage());
     }
 

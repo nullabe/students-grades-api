@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace StudentsGradesApi\Application\Query;
+namespace StudentsGradesApi\Application\Query\GetAllStudentsGradeAverage;
 
 use Ramsey\Uuid\UuidInterface;
+use StudentsGradesApi\Application\Query\QueryInterface;
 
 final class GetAllStudentsGradeAverageQuery implements QueryInterface
 {

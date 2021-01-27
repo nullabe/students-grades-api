@@ -22,6 +22,14 @@ final class JsonResponseFactory
         return new JsonResponse(['uuid' => $commandResponse->getValue()], $responseStatusCode);
     }
 
+    /**
+     * @param array<int, mixed> $viewModel
+     */
+    public static function fromViewModel(array $viewModel): JsonResponse
+    {
+        return new JsonResponse($viewModel, Response::HTTP_OK);
+    }
+
     public static function fromException(\Exception $e): JsonResponse
     {
         return match ($exceptionClass = get_class($e)) {

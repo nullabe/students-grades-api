@@ -12,7 +12,7 @@ use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\GradeDoctrineEn
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\StudentDoctrineEntity;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\ModelTransformer\StudentModelTransformer;
 
-final class StudentDoctrineRepository implements StudentRepositoryInterface
+final class DoctrineStudentRepository implements StudentRepositoryInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager
