@@ -38,7 +38,7 @@ final class StudentDoctrineRepository implements StudentRepositoryInterface
 
     public function delete(Student $student): void
     {
-        if (null === $studentDoctrineEntity = $this->get($student->getUuid())) {
+        if (null === $studentDoctrineEntity = $this->getStudentByUuid($student->getUuid())) {
             return;
         }
 

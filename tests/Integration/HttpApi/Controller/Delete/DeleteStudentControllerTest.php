@@ -6,8 +6,30 @@ namespace StudentsGradesApi\Tests\Integration\HttpApi\Controller\Delete;
 
 use StudentsGradesApi\Tests\Utils\TestCase\HttpApiTestCase;
 
-class DeleteStudentControllerTest extends HttpApiTestCase
+final class DeleteStudentControllerTest extends HttpApiTestCase
 {
+    public function test_delete_student_with_invalid_uuid(): void
+    {
+        $client = self::createClient();
+
+        $client->request('DELETE', '/students/yesyesyes');
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(400, $response->getStatusCode());
+    }
+
+    public function test_delete_student_not_found(): void
+    {
+        $client = self::createClient();
+
+        $client->request('DELETE', '/students/4ea27890-2916-4971-8ff8-a33e761ca8dd');
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
     public function test_delete_student(): void
     {
         $client = self::createClient();
