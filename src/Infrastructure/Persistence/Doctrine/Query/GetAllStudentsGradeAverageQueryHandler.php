@@ -7,7 +7,7 @@ namespace StudentsGradesApi\Infrastructure\Persistence\Doctrine\Query;
 use Doctrine\ORM\EntityManagerInterface;
 use StudentsGradesApi\Application\Query\GetAllStudentsGradeAverage\GetAllStudentsGradeAverageQuery;
 use StudentsGradesApi\Application\Query\GetAllStudentsGradeAverage\GetAllStudentsGradeAverageQueryHandlerInterface;
-use StudentsGradesApi\Application\Query\StudentGradeAverageViewModel;
+use StudentsGradesApi\Application\Query\GetAllStudentsGradeAverage\GetAllStudentsGradeAverageViewModel;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\Entity\StudentDoctrineEntity;
 use StudentsGradesApi\Infrastructure\Persistence\Doctrine\ModelTransformer\StudentModelTransformer;
 
@@ -18,16 +18,14 @@ final class GetAllStudentsGradeAverageQueryHandler implements GetAllStudentsGrad
     ) {
     }
 
-    public function handle(GetAllStudentsGradeAverageQuery $getAllStudentsGradeAverageQuery): array
+    public function handle(GetAllStudentsGradeAverageQuery $getAllStudentsGradeAverageQuery): GetAllStudentsGradeAverageViewModel
     {
-        $studentGradeAverageViewModels = [];
+        $students = [];
 
-        $students = $this->entityManager->getRepository(StudentDoctrineEntity::class)->findAll();
-
-        foreach ($students as $studentDoctrineEntity) {
-            $studentGradeAverageViewModels[] = new StudentGradeAverageViewModel(StudentModelTransformer::toDomainModel($studentDoctrineEntity));
+        foreach ($this->entityManager->getRepository(StudentDoctrineEntity::class)->findAll() as $studentDoctrineEntity) {
+            $students[] = StudentModelTransformer::toDomainModel($studentDoctrineEntity);
         }
 
-        return $studentGradeAverageViewModels;
+        return new GetAllStudentsGradeAverageViewModel($students);
     }
 }

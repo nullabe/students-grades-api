@@ -158,22 +158,17 @@ paths:
                     description: Not found. Student not found with the given UUID
     /students/grades/average:
         get:
-            summary: Returns a list of students uuid with their grade average.
+            summary: Returns an object of all students grades average.
             responses:
                 '200':
-                    description: A JSON array of students uuid with their grade average.
+                    description: A JSON object of all students grades average.
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    type: object
-                                    properties:
-                                        uuid:
-                                            type: string
-                                            format: uuid
-                                        gradeAverage:
-                                            type: number
+                                type: object
+                                properties:
+                                    gradeAverage:
+                                        type: number
     /students/{uuid}/grades/average:
         get:
             summary: Returns an object containing student uuid with his grade average.

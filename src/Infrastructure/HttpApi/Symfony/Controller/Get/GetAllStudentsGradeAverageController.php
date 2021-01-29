@@ -10,6 +10,7 @@ use StudentsGradesApi\Infrastructure\HttpApi\Symfony\Response\JsonResponseFactor
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class GetAllStudentsGradeAverageController extends AbstractController
@@ -23,18 +24,18 @@ final class GetAllStudentsGradeAverageController extends AbstractController
     #[Route(['path' => '/students/grades/average', 'methods' => ['GET']])]
     public function getAllStudentsGradeAverage(): JsonResponse
     {
-        $studentGradeAverageViewModels = [];
+        try {
+            $getAllStudentsGradeAverageViewModel = $this->getAllStudentsGradeAverageQueryHandler->handle(new GetAllStudentsGradeAverageQuery());
 
-        foreach ($this->getAllStudentsGradeAverageQueryHandler->handle(new GetAllStudentsGradeAverageQuery()) as $studentGradeAverageViewModel) {
-            $studentGradeAverageViewModel = $this->normalizer->normalize($studentGradeAverageViewModel, 'array');
+            $getAllStudentsGradeAverageViewModel = $this->normalizer->normalize($getAllStudentsGradeAverageViewModel, 'array');
 
-            if (!is_array($studentGradeAverageViewModel)) {
-                continue;
+            if (!is_array($getAllStudentsGradeAverageViewModel)) {
+                throw new NotEncodableValueException('Bad normalization');
             }
-
-            $studentGradeAverageViewModels[] = $studentGradeAverageViewModel;
+        } catch (\Exception $e) {
+            return JsonResponseFactory::fromException($e);
         }
 
-        return JsonResponseFactory::fromViewModel($studentGradeAverageViewModels);
+        return JsonResponseFactory::fromViewModel($getAllStudentsGradeAverageViewModel);
     }
 }

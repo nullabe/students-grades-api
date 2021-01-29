@@ -6,7 +6,7 @@ namespace StudentsGradesApi\Tests\UseCase\Student;
 
 use PHPUnit\Framework\TestCase;
 use StudentsGradesApi\Application\Query\GetStudentGradeAverage\GetStudentGradeAverageQuery;
-use StudentsGradesApi\Application\Query\StudentGradeAverageViewModel;
+use StudentsGradesApi\Application\Query\GetStudentGradeAverage\GetStudentGradeAverageViewModel;
 use StudentsGradesApi\Domain\ValueObject\Grade;
 use StudentsGradesApi\Tests\Utils\Stub\Domain\Model\StudentFactory;
 
@@ -25,22 +25,18 @@ final class GetStudentGradeAverageTest extends TestCase
     {
         $studentStub = (StudentFactory::getStudent())
             ->addGrade(new Grade('maths', 12))
-            ->addGrade(new Grade('maths', 4))
-            ->addGrade(new Grade('maths', 18))
-            ->addGrade(new Grade('maths', 13))
-            ->addGrade(new Grade('maths', 8))
-            ->addGrade(new Grade('maths', 17))
+            ->addGrade(new Grade('maths', 11))
         ;
 
-        $getStudentGradeAverageViewModel = new StudentGradeAverageViewModel($studentStub);
+        $getStudentGradeAverageViewModel = new GetStudentGradeAverageViewModel($studentStub);
 
         $this->assertEquals($studentStub->getUuid()->toString(), $getStudentGradeAverageViewModel->getUuid());
-        $this->assertEquals(12.0, $getStudentGradeAverageViewModel->getGradeAverage());
+        $this->assertEquals(11.5, $getStudentGradeAverageViewModel->getGradeAverage());
     }
 
     public function test_student_grade_average_view_model_from_student_with_no_grades(): void
     {
-        $getStudentGradeAverageViewModel = new StudentGradeAverageViewModel(StudentFactory::getStudent());
+        $getStudentGradeAverageViewModel = new GetStudentGradeAverageViewModel(StudentFactory::getStudent());
 
         $this->assertEquals(0.0, $getStudentGradeAverageViewModel->getGradeAverage());
     }

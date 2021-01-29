@@ -24,20 +24,8 @@ final class GetAllStudentsGradeAverageControllerTest extends WebTestCase
 
         $response = json_decode($contentResponse, true);
 
-        $this->assertCount(2, $response);
+        $this->assertArrayHasKey('gradeAverage', $response);
 
-        $this->assertArrayHasKey(0, $response);
-        $this->assertArrayHasKey(1, $response);
-
-        $this->assertArrayHasKey('uuid', $response[0]);
-        $this->assertArrayHasKey('uuid', $response[1]);
-        $this->assertArrayHasKey('gradeAverage', $response[0]);
-        $this->assertArrayHasKey('gradeAverage', $response[1]);
-
-        $this->assertEquals('eb6406cf-432d-4944-8122-a8dfb6ccdf4e', $response[0]['uuid']);
-        $this->assertEquals('ae13ebec-aec9-41e3-ac66-ea218cf89f7d', $response[1]['uuid']);
-
-        $this->assertEquals(17, $response[0]['gradeAverage']);
-        $this->assertEquals(16, $response[1]['gradeAverage']);
+        $this->assertEquals(16.5, $response['gradeAverage']);
     }
 }

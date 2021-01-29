@@ -30,17 +30,17 @@ final class GetStudentGradeAverageController extends AbstractController
         try {
             $getStudentGradeAverageQuery = $this->denormalizer->denormalize(['uuid' => Uuid::fromString($uuid)], GetStudentGradeAverageQuery::class);
 
-            $studentGradeAverageViewModel = $this->getStudentGradeAverageQueryHandler->handle($getStudentGradeAverageQuery);
+            $getStudentGradeAverageViewModel = $this->getStudentGradeAverageQueryHandler->handle($getStudentGradeAverageQuery);
 
-            $studentGradeAverageViewModel = $this->normalizer->normalize($studentGradeAverageViewModel, 'array');
+            $getStudentGradeAverageViewModel = $this->normalizer->normalize($getStudentGradeAverageViewModel, 'array');
 
-            if (!is_array($studentGradeAverageViewModel)) {
+            if (!is_array($getStudentGradeAverageViewModel)) {
                 throw new NotEncodableValueException('Bad normalization');
             }
         } catch (\Exception $e) {
             return JsonResponseFactory::fromException($e);
         }
 
-        return JsonResponseFactory::fromViewModel($studentGradeAverageViewModel);
+        return JsonResponseFactory::fromViewModel($getStudentGradeAverageViewModel);
     }
 }
