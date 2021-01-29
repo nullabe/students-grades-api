@@ -3,6 +3,12 @@ EXEC_PHP?=$(DOCKER_COMPOSE) exec php-fpm
 CONSOLE?=bin/console
 DIR=$(shell pwd)
 
+install:
+	make build start composer-install db quality
+
+composer-install:
+	${EXEC_PHP} composer install
+
 quality:
 	make cs-fix-dryrun phpstan
 

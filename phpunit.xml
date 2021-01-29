@@ -6,6 +6,7 @@
     </include>
     <exclude>
       <file>./src/Infrastructure/HttpApi/Symfony/Kernel.php</file>
+      <file>./src/Infrastructure/Persistence/Doctrine/DataFixture/StudentDoctrineEntityFixture.php</file>
     </exclude>
   </coverage>
 
