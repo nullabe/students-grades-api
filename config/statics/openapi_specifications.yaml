@@ -1,0 +1,204 @@
+openapi: 3.0.0
+
+info:
+    title: Students Grades API
+    description: A RESTFull API to manage students' grades.
+    version: 0.1.0
+
+servers:
+    - url: http://127.0.0.1:8080/
+      description: Local development server on docker.
+
+paths:
+    /students:
+        post:
+            summary: Add a new student
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                firstName:
+                                    type: string
+                                lastName:
+                                    type: string
+                                birthDate:
+                                    type: string
+                                    format: date
+                            required:
+                                - firstName
+                                - lastName
+                                - birthDate
+                        example:
+                            firstName: Antoine
+                            lastName: Belluard
+                            birthDate: 13-11-1990
+            responses:
+                '200':
+                    description: A JSON object of added student uuid.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    uuid:
+                                        type: string
+                                        format: uuid
+                '400':
+                    description: Bad request. One of - Invalid UUID, Missing parameter, Json syntax error
+    /students/{uuid}:
+        put:
+            summary: Update a given student
+            parameters:
+                -   in: path
+                    name: uuid
+                    schema:
+                        type: string
+                        format: uuid
+                    required: true
+                    description: String UUID of the student
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                firstName:
+                                    type: string
+                                lastName:
+                                    type: string
+                                birthDate:
+                                    type: string
+                                    format: uuid
+            responses:
+                '200':
+                    description: A JSON object of updated student uuid.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    uuid:
+                                        type: string
+                                        format: uuid
+                '400':
+                    description: Bad request. One of - Invalid UUID, Json syntax error
+                '404':
+                    description: Not found. Student not found with the given UUID
+        delete:
+            summary: Delete a given student
+            parameters:
+                  -   in: path
+                      name: uuid
+                      schema:
+                          type: string
+                          format: uuid
+                      required: true
+                      description: String UUID of the student
+
+            responses:
+                '200':
+                    description: A JSON object of delete student uuid.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    uuid:
+                                        type: string
+                                        format: uuid
+                '400':
+                    description: Bad request. Invalid UUID
+                '404':
+                    description: Not found. Student not found with the given UUID
+    /students/{uuid}/grades:
+        put:
+            summary: Add a new grade to the given student
+            parameters:
+                - in: path
+                  name: uuid
+                  schema:
+                      type: string
+                      format: uuid
+                  required: true
+                  description: String UUID of the student
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                gradeSubject:
+                                    type: string
+                                gradeValue:
+                                    type: number
+                                    minimum: 0
+                                    maximum: 20
+                        example:
+                            gradeSubject: Maths
+                            gradeValue: 18.0
+            responses:
+                '200':
+                    description: A JSON object of updated student uuid.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    uuid:
+                                        type: string
+                                        format: uuid
+                '400':
+                    description: Bad request. One of - Invalid UUID, Invalid grade (a float between 0.0 and 20.0), Missing parameter, Json syntax error
+                '404':
+                    description: Not found. Student not found with the given UUID
+    /students/grades/average:
+        get:
+            summary: Returns a list of students uuid with their grade average.
+            responses:
+                '200':
+                    description: A JSON array of students uuid with their grade average.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    properties:
+                                        uuid:
+                                            type: string
+                                            format: uuid
+                                        gradeAverage:
+                                            type: number
+    /students/{uuid}/grades/average:
+        get:
+            summary: Returns an object containing student uuid with his grade average.
+            parameters:
+                -   in: path
+                    name: uuid
+                    schema:
+                        type: string
+                        format: uuid
+                    required: true
+                    description: String UUID of the student
+            responses:
+                '200':
+                    description: A JSON object of student uuid with his grade average.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    uuid:
+                                        type: string
+                                        format: uuid
+                                    gradeAverage:
+                                        type: number
+                '400':
+                    description: Bad request. Invalid UUID
+                '404':
+                    description: Not found. Student not found with the given UUID

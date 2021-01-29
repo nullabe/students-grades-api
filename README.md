@@ -117,6 +117,4 @@ Implemented by using Hexagonal Architecture with CQRS and (some) DDD principles.
 
 ## Go further
 
--> declare the student entity as aggregate root to do event-sourcing
-
--> add a command bus to add middlewares on command/query
+-> add a command bus to add middlewares on command/query: eg cache/logger

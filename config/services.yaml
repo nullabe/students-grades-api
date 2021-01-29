@@ -1,4 +1,5 @@
 parameters:
+    openapi_specifications_file_path: '%kernel.project_dir%/config/statics/openapi_specifications.yaml'
 
 services:
     _defaults:

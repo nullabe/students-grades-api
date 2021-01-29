@@ -1,6 +1,7 @@
 DOCKER_COMPOSE?=docker-compose --file deploy/docker/dev/docker-compose.yml
 EXEC_PHP?=$(DOCKER_COMPOSE) exec php-fpm
 CONSOLE?=bin/console
+DIR=$(shell pwd)
 
 quality:
 	make cs-fix-dryrun phpstan
@@ -47,6 +48,12 @@ build:
 
 start:
 	${DOCKER_COMPOSE} up -d --remove-orphan
+
+start-doc:
+	docker run --rm -d -p 8081:8080 --name api-doc -e SWAGGER_JSON=/api/statics/openapi_specifications.yaml -v ${DIR}/config/statics:/api/statics swaggerapi/swagger-ui
+
+stop-doc:
+	docker stop api-doc
 
 stop:
 	${DOCKER_COMPOSE} down
