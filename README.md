@@ -14,7 +14,7 @@ To build and run the project, you must check that your computer have these progr
 
 ### Build project
 
-All command to install & run the project are encapsuled into the Makefile at project root. 
+All commands for installing & runing the project are encapsuled into the Makefile at project root. 
 To install the project, simply type this into your terminal.
 
 ```
