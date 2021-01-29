@@ -170,13 +170,13 @@ This architecture enable the use of the Command Bus pattern. The command bus is 
 The middlewares can be push on the bus with any order, they must implements the same interface and every one of them must call the next one. The last middleware is called a `CommandDispatcher`,
 it simply dispatch the command/query to the associated handler.
 
-This can be very usefull to implements generic things that not depends on the business model like logs (with monolog), cache (symfony or external like redis/memcached/...) or authentication.
+This can be very usefull to implements transversal code like logs (with monolog), cache (symfony or external like redis/memcached/...) or authentication.
 
 Some middleware exemples :
 * **Cache middleware**: Check if the query handler result value is in cache (and not expired of course), if yes, it stop the chain and directly return the cache value.
 * **Logger middleware** : Log what happen in the handler and when.
 * **Request headers verifications Middleware** : Check if request have the required headers (content-type)
-* **Authentication Middleware** : Can check on an authentication provider if bearer token is valid and authorized to access the ressource.
+* **Authentication Middleware** : Can check on an authentication provider if bearer token is valid and authorized to access the resource.
 
 ## Resources links
 
@@ -184,4 +184,6 @@ Some middleware exemples :
 * Jean-Marie Lamodière talk about Meetic legacy migration to DDD architecture at ForumPHP 2019 : https://www.youtube.com/watch?v=tdE5wE5MvsI
 * An interesting take on why we must abuse of Command pattern but not implements CQRS everytime : https://dev.to/ludofleury/domain-driven-design-with-php-and-symfony-1bl6
 
-## Thanks for the reading !
+----
+
+**Thanks for the reading !**
